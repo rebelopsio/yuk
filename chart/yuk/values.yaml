@@ -1,0 +1,79 @@
+replicaCount: 1
+
+image:
+  repository: yuk
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 128Mi
+  requests:
+    cpu: 10m
+    memory: 64Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Controller configuration
+controller:
+  metricsAddr: ":8080"
+  probeAddr: ":8081"
+  enableLeaderElection: true
+  logLevel: info
+
+# Custom Resource Definitions
+crds:
+  install: true
+
+# RBAC configuration
+rbac:
+  create: true
+
+# Service monitor for Prometheus
+monitoring:
+  enabled: true
+  serviceMonitor:
+    enabled: false  # Set to true if using Prometheus Operator
+    namespace: ""
+    labels: {}
+    annotations: {}
+
+# AWS configuration
+aws:
+  region: us-east-1
+  irsa:
+    enabled: false
+    roleArn: ""
+
+# Git configuration
+git:
+  defaultEmail: "yuk@rebelops.io"
+  defaultName: "Yuk Controller"

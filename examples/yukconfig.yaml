@@ -1,0 +1,38 @@
+apiVersion: yuk.rebelops.io/v1
+kind: YukConfig
+metadata:
+  name: my-app-config
+  namespace: default
+spec:
+  # Check for updates every 5 minutes
+  checkInterval: 5m
+
+  # Repository configuration
+  repository:
+    type: ecr
+    ecr:
+      region: us-east-1
+      repositoryName: my-app
+      tagFilter: "^v[0-9]+\\.[0-9]+\\.[0-9]+$"  # Only semantic version tags
+      auth:
+        useIRSA: true  # Use IAM Roles for Service Accounts
+
+  # Git configuration
+  git:
+    repository: https://github.com/myorg/k8s-manifests.git
+    branch: main
+    email: yuk@myorg.com
+    name: Yuk Controller
+    commitMessage: "Update {{.Repository}} to {{.Tag}}"
+    auth:
+      personalAccessTokenRef:
+        name: github-token
+        key: token
+
+  # Files and keys to update
+  updateTargets:
+    - file: apps/my-app/deployment.yaml
+      yamlPath: spec.template.spec.containers[0].image
+      imageTagOnly: true
+    - file: apps/my-app/kustomization.yaml
+      yamlPath: images[0].newTag

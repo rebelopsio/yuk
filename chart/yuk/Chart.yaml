@@ -1,0 +1,19 @@
+apiVersion: v2
+name: yuk
+description: A Kubernetes controller for automated image updates in GitOps workflows
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+home: https://github.com/rebelopsio/yuk
+sources:
+  - https://github.com/rebelopsio/yuk
+maintainers:
+  - name: RebelOps.io
+    email: info@rebelops.io
+keywords:
+  - kubernetes
+  - controller
+  - image-updates
+  - gitops
+  - ecr
+  - github
