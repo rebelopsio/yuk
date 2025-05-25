@@ -1,0 +1,37 @@
+run:
+  timeout: 5m
+  tests: true
+
+linters-settings:
+  govet:
+    enable:
+      - shadow
+  gocyclo:
+    min-complexity: 15
+  maligned:
+    suggest-new: true
+  dupl:
+    threshold: 100
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+
+linters:
+  enable:
+    - govet
+    - gocyclo
+    - goconst
+    - ineffassign
+    - goimports
+    - misspell
+    - unparam
+    - typecheck
+
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  exclude-dirs:
+    - bin
+    - hack
+    - vendor

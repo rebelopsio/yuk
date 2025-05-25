@@ -1,4 +1,3 @@
-/*
 MIT License
 
 Copyright (c) 2024 Yuk Contributors
@@ -20,38 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
-
-package ecr
-
-import (
-	"testing"
-)
-
-func TestNewClient(t *testing.T) {
-	region := "us-east-1"
-	client := NewClient(region)
-
-	if client == nil {
-		t.Fatal("Expected client to be created, got nil")
-	}
-
-	if client.region != region {
-		t.Errorf("Expected region %s, got %s", region, client.region)
-	}
-
-	if client.ecrClient != nil {
-		t.Error("Expected ecrClient to be nil before initialization")
-	}
-}
-
-func TestClient_GetLatestTag_EmptyRepository(t *testing.T) {
-	client := NewClient("us-east-1")
-
-	// This test would require AWS credentials and real ECR repository
-	// In a real implementation, you would mock the ECR client
-	// For now, we'll test the basic structure
-	if client.region != "us-east-1" {
-		t.Errorf("Expected region us-east-1, got %s", client.region)
-	}
-}
