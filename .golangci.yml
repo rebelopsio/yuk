@@ -1,14 +1,11 @@
 run:
   timeout: 5m
   tests: true
-  skip-dirs:
-    - bin
-    - hack
-    - vendor
 
 linters-settings:
   govet:
-    check-shadowing: true
+    enable:
+      - shadow
   gocyclo:
     min-complexity: 15
   maligned:
@@ -34,3 +31,7 @@ issues:
   exclude-use-default: false
   max-issues-per-linter: 0
   max-same-issues: 0
+  exclude-dirs:
+    - bin
+    - hack
+    - vendor
